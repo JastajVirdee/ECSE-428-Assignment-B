@@ -1,7 +1,7 @@
 package postalratecalculator;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import postalratecalculator.PostalRateCalculator;
@@ -12,7 +12,7 @@ public class PostalRateTest {
 	
 	@Before
 	public void setUp() {
-		
+
 	}
 	
 	@After
@@ -20,4 +20,8 @@ public class PostalRateTest {
 		
 	}
 	
+	@Test
+	public void test1() {
+		
+	}
 }
