@@ -51,11 +51,20 @@ public class PostalRateCalculator {
 			result = "Too many arguments!";
 		}
 		
-		// convert cost to string
 		else {
-			int cost = getCost(arguments);
-			String costString = Integer.toString(cost);
-			result = "$"+costString+".00";
+			
+			// check dimensions
+			boolean length = checkDimension(arguments[2]);
+			if (!length) {
+				result = "Invalid length. Minimum = 0.1 cm, Max = 200 cm.";
+			}
+			
+			else {
+				// convert cost to string
+				int cost = getCost(arguments);
+				String costString = Integer.toString(cost);
+				result = "$"+costString+".00";
+			}
 		}
 		
 		return result;
@@ -108,5 +117,12 @@ public class PostalRateCalculator {
 		else cost += 15;
 		
 		return cost;
+	}
+	
+	// check if dimension is valid
+	public static boolean checkDimension(String dim) {
+		double dimension = Double.parseDouble(dim);
+		if (dimension < 0.1) return false;
+		else return true;
 	}
 }

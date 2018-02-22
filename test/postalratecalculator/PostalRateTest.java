@@ -43,4 +43,11 @@ public class PostalRateTest {
 		String result = PostalRateCalculator.helper(args);
 		assertEquals("Too many arguments!", result);
 	}
+	
+	@Test
+	public void lengthTooSmall() {
+		String[] args = {"H9K1J4", "H9K1S3", "0.01", "55", "130", "15", "regular"};
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("Invalid length. Minimum = 0.1 cm, Max = 200 cm.", result);
+	}
 }
