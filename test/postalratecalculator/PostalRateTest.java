@@ -8,20 +8,32 @@ import postalratecalculator.PostalRateCalculator;
 
 public class PostalRateTest {
 	
-	private PostalRateCalculator calculator = new PostalRateCalculator();
-	
 	@Before
 	public void setUp() {
-
 	}
 	
 	@After
 	public void tearDown() {
-		
 	}
 	
 	@Test
-	public void test1() {
-		
+	public void validInputs() {
+		String[] args = {"H9K1J4", "H9K1S3", "10", "55", "130", "15", "regular"};
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("$23.00", result);
+	}
+	
+	@Test
+	public void noArguments() {
+		String[] args = null;
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("Please enter required arguments.", result);
+	}
+	
+	@Test
+	public void lessThan7Args() {
+		String[] args = {"H9K1J4", "H9K1S3", "10"};
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("Not enough arguments!", result);
 	}
 }
