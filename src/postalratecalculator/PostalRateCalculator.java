@@ -21,12 +21,8 @@ public class PostalRateCalculator {
 		
 		// set arguments
 		String[] arguments;
-		if (input.equals("")) {
-			arguments = null;
-		}
-		else {
-			arguments = input.split(" ");
-		}
+		if (input.equals("")) arguments = null;
+		else arguments = input.split(" ");
 		
 		// get result
 		String result = helper(arguments);
@@ -40,9 +36,19 @@ public class PostalRateCalculator {
 		// store output in this variable
 		String result;
 		
-		//check if no arguments
+		// check if no arguments
 		if (arguments == null) {
 			result = "Please enter required arguments.";
+		}
+		
+		// check if less than 7 arguments
+		else if (arguments.length < 7) {
+			result = "Not enough arguments!";
+		}
+		
+		// check if more than 7 arguments
+		else if (arguments.length > 7) {
+			result = "Too many arguments!";
 		}
 		
 		// convert cost to string

@@ -36,4 +36,11 @@ public class PostalRateTest {
 		String result = PostalRateCalculator.helper(args);
 		assertEquals("Not enough arguments!", result);
 	}
+	
+	@Test
+	public void moreThan7Args() {
+		String[] args = {"H9K1J4", "H9K1S3", "10", "55", "130", "15", "regular", "hello", "world"};
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("Too many arguments!", result);
+	}
 }
