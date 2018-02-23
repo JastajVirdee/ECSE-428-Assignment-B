@@ -55,12 +55,12 @@ public class PostalRateCalculator {
 			
 			// check dimensions
 			boolean length = checkDimension(arguments[2]);
-			if (!length) {
-				result = "Invalid length. Minimum = 0.1 cm, Max = 200 cm.";
-			}
+			boolean width = checkDimension(arguments[3]);
+			if (!length) result = "Invalid length. Minimum = 0.1 cm, Max = 200 cm.";
+			else if (!width) result = "Invalid width. Minimum = 0.1 cm, Max = 200 cm.";
 			
+			// convert cost to string
 			else {
-				// convert cost to string
 				int cost = getCost(arguments);
 				String costString = Integer.toString(cost);
 				result = "$"+costString+".00";

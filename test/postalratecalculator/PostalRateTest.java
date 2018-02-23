@@ -57,4 +57,18 @@ public class PostalRateTest {
 		String result = PostalRateCalculator.helper(args);
 		assertEquals("Invalid length. Minimum = 0.1 cm, Max = 200 cm.", result);
 	}
+	
+	@Test
+	public void widthTooSmall() {
+		String[] args = {"H9K1J4", "H9K1S3", "10", "0.01", "130", "15", "regular"};
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("Invalid width. Minimum = 0.1 cm, Max = 200 cm.", result);
+	}
+	
+	@Test
+	public void widthTooBig() {
+		String[] args = {"H9K1J4", "H9K1S3", "10", "300", "130", "15", "regular"};
+		String result = PostalRateCalculator.helper(args);
+		assertEquals("Invalid width. Minimum = 0.1 cm, Max = 200 cm.", result);
+	}
 }
