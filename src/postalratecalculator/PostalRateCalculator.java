@@ -122,7 +122,7 @@ public class PostalRateCalculator {
 	// check if dimension is valid
 	public static boolean checkDimension(String dim) {
 		double dimension = Double.parseDouble(dim);
-		if (dimension < 0.1) return false;
+		if (dimension < 0.1 || dimension > 200) return false;
 		else return true;
 	}
 }
