@@ -56,17 +56,55 @@ public class PostalRateCalculator {
 			// check dimensions
 			boolean length = checkDimension(arguments[2]);
 			boolean width = checkDimension(arguments[3]);
+			boolean height = checkDimension(arguments[4]);
+			boolean weight = checkWeight(arguments[5]);
 			if (!length) result = "Invalid length. Minimum = 0.1 cm, Max = 200 cm.";
 			else if (!width) result = "Invalid width. Minimum = 0.1 cm, Max = 200 cm.";
+			else if (!height) result = "Invalid height. Minimum = 0.1 cm, Max = 200 cm.";
+			else if (!weight) result = "Invalid weight. Minimum = 0 cm, Max = 30 cm.";
 			
-			// convert cost to string
 			else {
-				int cost = getCost(arguments);
-				String costString = Integer.toString(cost);
-				result = "$"+costString+".00";
+				
+				// check postal shipping type 
+				boolean postalType = checkPostType(arguments[6]);
+				if (!postalType) result = "Invalid Post Type. Choices are: Regular, Xpress or Priority.";
+				
+				else {
+					
+					// check if from postal code has 6 characters
+					boolean postalFromLength = checkPostLength(arguments[0]);
+					if (!postalFromLength) result = "Invalid From Postal Code. The postal code must have a length of 6.";
+					
+					else {
+						
+						// check if from postal code has valid characters
+						boolean postalFromCharacters = checkPostalCharacters(arguments[0]);
+						if (!postalFromCharacters) result = "Invalid From Postal Code. The postal code must be only composed of letters and digits with no spaces.";
+						
+						else {
+							
+							// check if to postal code has 6 characters
+							boolean postalToLength = checkPostLength(arguments[1]);
+							if (!postalToLength) result = "Invalid Destination Postal Code. The postal code must have a length of 6.";
+							
+							else{
+								
+								// check if to postal code has valid characters
+								boolean postalToCharacters = checkPostalCharacters(arguments[1]);
+								if (!postalToCharacters) result = "Invalid Destination Postal Code. The postal code must be only composed of letters and digits with no spaces.";
+								
+								else {
+									
+									int cost = getCost(arguments);
+									String costString = Integer.toString(cost);
+									result = "$"+costString+".00";
+								}
+							}
+						}
+					}
+				}
 			}
-		}
-		
+		}	
 		return result;
 	}
 	
@@ -125,4 +163,64 @@ public class PostalRateCalculator {
 		if (dimension < 0.1 || dimension > 200) return false;
 		else return true;
 	}
-}
+	
+	// check if weight is valid
+	public static boolean checkWeight(String wei) {
+		double weight = Double.parseDouble(wei);
+		if (weight < 0 || weight > 30) return false;
+		else return true;
+	}
+	
+	// check if post type is valid 
+	public static boolean checkPostType(String postType) {
+		String postTypeLowerCase = postType.toLowerCase();
+		if (postTypeLowerCase.equals("regular")) return true;
+		else if (postTypeLowerCase.equals("xpress")) return true;
+		else if (postTypeLowerCase.equals("priority")) return true;
+		else return false;
+	}
+	
+	// check if postal code has 6 characters
+	public static boolean checkPostLength(String post) {
+		int postLength = post.length();
+		if (postLength == 6) return true;
+		else return false;
+	}
+	
+	// check if postal code contains only digits and letters
+	public static boolean checkPostalCharacters(String post) {
+		char[] charsFromString = post.toCharArray();
+		for (char current : charsFromString) {
+			if((!Character.isLetter(current))  && (!Character.isDigit(current))) {
+	            return false;
+	        }
+		}
+		return true;		
+	}
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
